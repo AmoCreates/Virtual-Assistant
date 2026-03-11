@@ -15,9 +15,7 @@ const UserContext = ({children}) => {
   const handleCurrentUser = async () => {
         try {
           const response = await api.get('/api/v1/user/current', { withCredentials: true });
-
             setUserData(response.data);
-            console.log(response.data);
           
         } catch (error) {
           console.error("Signup Error:", error.response?.data || error.message);

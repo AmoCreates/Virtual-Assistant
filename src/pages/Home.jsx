@@ -28,7 +28,6 @@ const Home = () => {
     
     // Log available voices for debugging
     const englishVoices = voices.filter(v => v.lang && v.lang.startsWith('en'));
-    console.log('Available English voices:', englishVoices.map(v => ({ name: v.name, lang: v.lang })));
     
     let selected;
     
@@ -63,7 +62,6 @@ const Home = () => {
       selected = voices.find(v => v.lang && v.lang.startsWith('en'));
     }
     
-    console.log(`Selected voice for "${preference}":`, selected?.name, selected?.lang);
     return selected || null;
   }, []);
 
@@ -122,7 +120,6 @@ const Home = () => {
     const selected = getVoiceByPreference(preference);
     if (selected) {
       selectedVoiceRef.current = selected;
-      console.log('Voice preference updated to:', selected.name, 'for preference:', preference);
     }
   }, [userData?.voicePreference, userData, getVoiceByPreference]);
 
@@ -278,13 +275,11 @@ const Home = () => {
     };
 
     recognition.onstart = () => {
-      console.log('Speech recognition started');
       isRecognizingRef.current = true; // double check to prevent multiple starts
       setIsListening(true);
     };
 
     recognition.onend = () => {
-      console.log('Speech recognition ended');
       isRecognizingRef.current = false;
       setIsListening(false);
 
@@ -302,7 +297,6 @@ const Home = () => {
 
       if (command.toLowerCase().includes(userData.assistantName.toLowerCase())) {
         const response = await assistantResponse(command);
-        console.log('Assistant response:', response);
         if (response) {
           handleCommand(response);
         }
@@ -322,7 +316,6 @@ const Home = () => {
     }
 
     window.speechSynthesis.onvoiceschanged = () => {
-      console.log('Voices loaded, ready to speak');
     };
 
     // Speak greeting with selected voice
@@ -347,7 +340,6 @@ const Home = () => {
         startTimeout();
       };
       window.speechSynthesis.speak(greeting);
-      console.log('Greeting spoken with voice:', selectedVoiceRef.current?.name, 'for preference:', userData?.voicePreference || 'girl (default)');
     };
 
     // Delay to ensure voices are loaded
