@@ -410,6 +410,7 @@ const Home = () => {
         
         <div className='text-center'>
           <h1 className='assistantName text-4xl sm:text-5xl mb-4'>Hi, I am {userData?.assistantName || "Elli"}</h1>
+          <p className='text-sm text-zinc-400'>Must include assistant name in you converstaion to get response</p>
           
           {/* Voice Indicator */}
           <div className='flex flex-col items-center gap-3 mt-6'>
